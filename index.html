@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LDS INFORMATIK — Prise en charge atelier</title>
+
+  <style>
+    :root{
+      --bg:#d8e9ff;
+      --primary:#004AAD;
+      --text:#162a68;
+      --card:#ffffff;
+      --muted:#6b7bb3;
+      --border:rgba(22,42,104,.18);
+      --shadow: 0 10px 24px rgba(0,0,0,.10);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: linear-gradient(0deg, #ffffff 0%, var(--bg) 70%);
+    }
+
+    header{
+      padding:22px 18px 12px;
+      max-width:1180px;
+      margin:0 auto;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:260px;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:16px;
+      background: var(--primary);
+      display:grid;place-items:center;
+      color:#fff;
+      box-shadow: var(--shadow);
+      font-weight:900;
+      letter-spacing:.5px;
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      line-height:1.1;
+    }
+    .brand p{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    button, .btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:700;
+      box-shadow: 0 6px 16px rgba(0,0,0,.06);
+    }
+    button.primary{
+      background: var(--primary);
+      border-color: transparent;
+      color:#fff;
+    }
+    button:active{transform:translateY(1px)}
+    .hint{
+      max-width:1180px;
+      margin:0 auto;
+      padding:0 18px 18px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    main{
+      max-width:1180px;
+      margin:0 auto;
+      padding: 0 18px 26px;
+      display:grid;
+      gap:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .card .title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 16px;
+      background: rgba(0,74,173,.10);
+      border-bottom:1px solid var(--border);
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      font-size:12px;
+      font-weight:900;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(0,74,173,.16);
+      color: var(--primary);
+      border:1px solid rgba(0,74,173,.22);
+      white-space:nowrap;
+    }
+    .card h2{
+      margin:0;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+
+    .content{padding:14px 16px}
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    @media (max-width: 720px){
+      .row{grid-template-columns:1fr}
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      font-weight:900;
+      color: var(--text);
+      margin: 0 0 6px;
+      text-transform: uppercase;
+      letter-spacing:.35px;
+    }
+    input[type="text"], input[type="tel"], input[type="email"], input[type="date"], textarea, select{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:11px 12px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+      color:var(--text);
+    }
+    textarea{min-height:110px; resize:vertical}
+
+    .checkline{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:6px;
+      color:var(--text);
+      font-weight:700;
+    }
+    .check{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(22,42,104,.04);
+    }
+    .check input{width:16px;height:16px}
+
+    .split{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .split{grid-template-columns:1fr}
+    }
+
+    .pinbox{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .pattern{
+      border:1px dashed rgba(22,42,104,.35);
+      border-radius:16px;
+      padding:12px;
+      background: rgba(0,74,173,.06);
+    }
+    .dots{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      max-width:220px;
+      margin-top:8px;
+    }
+    .dot{
+      width:48px;height:48px;
+      border-radius:14px;
+      border:1px solid rgba(22,42,104,.28);
+      background:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      user-select:none;
+      font-weight:900;
+      color: rgba(22,42,104,.55);
+    }
+    .dot.active{
+      background: var(--primary);
+      color:#fff;
+      border-color: transparent;
+    }
+    .small{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+      margin:0;
+    }
+
+    .cgv{
+      font-size:12px;
+      line-height:1.5;
+      color: rgba(22,42,104,.92);
+      white-space:pre-line;
+    }
+
+    .signature{
+      border:1px solid rgba(22,42,104,.22);
+      border-radius:16px;
+      background: #fff;
+      height:170px;
+      display:block;
+      width:100%;
+      touch-action:none;
+    }
+    .sig-actions{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      max-width:1180px;
+      margin:0 auto;
+      padding: 0 18px 24px;
+      color: rgba(22,42,104,.75);
+      font-size:12px;
+    }
+
+    /* Impression (PDF via Ctrl+P / bouton Export PDF) */
+    @media print{
+      header,.hint,.actions,.sig-actions,.no-print{display:none !important;}
+      body{background:#fff;}
+      main{padding:0}
+      .card{box-shadow:none}
+      .grid{grid-template-columns:1fr}
+      input, textarea, select{border:1px solid #999 !important;}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">LDS</div>
+      <div>
+        <h1>LDS INFORMATIK — Prise en charge atelier</h1>
+      </div>
+    </div>
+
+    <div class="actions no-print">
+      <button id="btnNew" title="Réinitialiser le formulaire">Nouveau</button>
+      <button id="btnSave">Sauvegarder</button>
+      <button id="btnExportJson">Exporter en JSON</button>
+      <button class="primary" id="btnPdf">Exporter en PDF</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid">
+      <div class="card">
+        <div class="title">
+          <h2>PRISE EN CHARGE</h2>
+        </div>
+        <div class="content">
+          <div class="row">
+            <div>
+              <label for="date_pec">Date de la prise en charge</label>
+              <input id="date_pec" type="date" />
+            </div>
+            <div>
+              <label for="resp_pec">Responsable de la prise en charge</label>
+              <input id="resp_pec" type="text"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title">
+          <h2>INFORMATIONS DU CLIENT</h2>
+        </div>
+        <div class="content">
+          <label>Civilité</label>
+          <div class="checkline" role="group" aria-label="Civilité">
+            <label class="check"><input type="radio" name="civilite" value="Monsieur"> Monsieur</label>
+            <label class="check"><input type="radio" name="civilite" value="Madame"> Madame</label>
+          </div>
+
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="nom">Nom</label>
+              <input id="nom" type="text" />
+            </div>
+            <div>
+              <label for="prenom">Prénom</label>
+              <input id="prenom" type="text" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="societe">Société</label>
+              <input id="societe" type="text" />
+            </div>
+            <div>
+              <label for="tel">Téléphone</label>
+              <input id="tel" type="tel"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="mail">Mail</label>
+              <input id="mail" type="email"/>
+            </div>
+            <div>
+              <label for="adresse">Adresse postale</label>
+              <input id="adresse" type="text" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="cp">Code postal</label>
+              <input id="cp" type="text" />
+            </div>
+            <div>
+              <label for="ville">Ville</label>
+              <input id="ville" type="text" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="title">
+          <h2>INFORMATIONS DE L'APPAREIL</h2>
+        </div>
+
+        <div class="content">
+          <label>Type</label>
+          <div class="checkline" role="group" aria-label="Type appareil">
+            <label class="check"><input type="checkbox" id="type_ordi"> Ordinateur</label>
+            <label class="check"><input type="checkbox" id="type_smart"> Smartphone</label>
+            <label class="check"><input type="checkbox" id="type_tab"> Tablette</label>
+          </div>
+
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="modele">Modèle</label>
+              <input id="modele" type="text" placeholder="ex: iPhone 13 / MacBook Pro / HP..." />
+            </div>
+            <div>
+              <label for="serial">N° de série / IMEI</label>
+              <input id="serial" type="text" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div style="grid-column: 1 / -1;">
+              <label for="problemes">Problème(s) rencontré(s) / prestation(s) souhaitée(s)</label>
+              <textarea id="problemes" placeholder="Décris le souci, symptômes, contexte, etc."></textarea>
+            </div>
+          </div>
+
+          <div class="split">
+            <div class="pinbox">
+              <label>Avez-vous un code de déverrouillage ?</label>
+              <div class="checkline">
+                <label class="check"><input type="radio" name="code_unlock" value="Oui"> Oui</label>
+                <label class="check"><input type="radio" name="code_unlock" value="Non"> Non</label>
+              </div>
+
+              <div>
+                <label for="pin">Code PIN / Mot de passe</label>
+                <input id="pin" type="text" placeholder="(si fourni par le client)" />
+              </div>
+            </div>
+
+            <div class="pattern">
+              <label>Schéma (3x3)</label>
+              <p class="small">Clique les points dans l’ordre (ça ne trace pas de traits, mais ça mémorise la séquence).</p>
+              <div class="dots" id="dots"></div>
+              <div style="margin-top:10px;">
+                <label for="schema_seq">Séquence</label>
+                <input id="schema_seq" type="text" readonly />
+              </div>
+              <div class="sig-actions">
+                <button type="button" id="btnSchemaClear">Effacer schéma</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title">
+          <h2>CGV DES REPARATIONS</h2>
+        </div>
+        <div class="content">
+          <div class="cgv" id="cgvText">
+Avant le dépôt de votre appareil assurez-vous d’avoir fait une sauvegarde de vos données.
+
+Le client reconnaît être informé que la réparation de son appareil par LDS INFORMATIK peut entraîner une perte de la garantie du constructeur et/ou du distributeur.
+
+LDS INFORMATIK ne saurait être tenu responsable de la perte éventuelle des données stockées sur l’appareil.
+
+LDS INFORMATIK se décharge de toute responsabilité si l’appareil oxydé ne retrouve pas toutes les fonctionnalités d’origine.
+
+LDS INFORMATIK ne saurait être tenu responsable de la perte éventuelle des fonctionnalités Face ID et Touch ID des appareils Apple, ces dernières étant programmées en usine.
+
+LDS INFORMATIK se réserve le droit de supprimer les données et disposer de tout appareil non récupéré après 45 jours à compter de la date de mise à disposition.
+
+LDSINFORMATIK garantie toutes ses réparations 12 mois
+
+La garantie ne couvre pas : 
+- les logiciels internes et mises à jour
+- les dommages cosmétiques (fissures, rayures etc...)
+- les dommages causés suite à une intervention réalisée par une personne externe à notre entreprise
+- les défauts résultant de l’usure normale ou du vieillissement normal d’une réparation
+- les réparations et les diagnostics effectués sur un appareil oxydé
+- et d’une manière générale les mauvaises utilisations faites avec l’appareil
+
+          </div>
+          <div style="margin-top:12px;">
+            <label class="check" style="display:inline-flex;">
+              <input type="checkbox" id="accept_cgv">
+              J’ai pris connaissance des CGV ci-dessus.
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="title">
+          <h2>SIGNATURE DU CLIENT</h2>
+        </div>
+        <div class="content">
+          <canvas id="signature" class="signature"></canvas>
+          <div class="sig-actions no-print">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="title">
+          <h2>NOTES INTERNE</h2>
+        </div>
+        <div class="content">
+          <label for="notes">Observations / diagnostic / pièces / devis</label>
+          <textarea id="notes" placeholder="(visible uniquement en interne)"></textarea>
+          <div class="row" style="margin-top:12px;">
+            <div>
+              <label for="statut">Statut</label>
+              <select id="statut">
+                <option value="">—</option>
+                <option>Reçu</option>
+                <option>En diagnostic</option>
+                <option>En attente client</option>
+                <option>En réparation</option>
+                <option>Terminé</option>
+                <option>Restitué</option>
+              </select>
+            </div>
+            <div>
+              <label for="prix">Prix estimé</label>
+              <input id="prix" type="text" placeholder="ex: 129 €" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>LDS INFORMATIK</strong> — 22 RUE BOUCHERAT - 10000 TROYES | 07 45 01 41 27 | CONTACT@LDSINFORMATIK.FR
+  </footer>
+
+  <script>
+    const STORAGE_KEY = "lds_prise_en_charge_v1";
+
+    // --- Helpers
+    const $ = (id) => document.getElementById(id);
+    const qsa = (sel) => Array.from(document.querySelectorAll(sel));
+
+    function formState(){
+      const civilite = (document.querySelector('input[name="civilite"]:checked')||{}).value || "";
+      const code_unlock = (document.querySelector('input[name="code_unlock"]:checked')||{}).value || "";
+      return {
+        date_pec: $("date_pec").value,
+        resp_pec: $("resp_pec").value,
+        civilite,
+        nom: $("nom").value,
+        prenom: $("prenom").value,
+        societe: $("societe").value,
+        tel: $("tel").value,
+        mail: $("mail").value,
+        adresse: $("adresse").value,
+        cp: $("cp").value,
+        ville: $("ville").value,
+        type_ordi: $("type_ordi").checked,
+        type_smart: $("type_smart").checked,
+        type_tab: $("type_tab").checked,
+        modele: $("modele").value,
+        serial: $("serial").value,
+        problemes: $("problemes").value,
+        code_unlock,
+        pin: $("pin").value,
+        schema_seq: $("schema_seq").value,
+        accept_cgv: $("accept_cgv").checked,
+        notes: $("notes").value,
+        statut: $("statut").value,
+        prix: $("prix").value,
+        signature_dataurl: signatureDataUrl || ""
+      };
+    }
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return null;
+        return JSON.parse(raw);
+      }catch(e){ return null; }
+    }
+
+    function applyState(s){
+      if(!s) return;
+      $("date_pec").value = s.date_pec || "";
+      $("resp_pec").value = s.resp_pec || "";
+
+      qsa('input[name="civilite"]').forEach(r => r.checked = (r.value === (s.civilite||"")));
+      $("nom").value = s.nom || "";
+      $("prenom").value = s.prenom || "";
+      $("societe").value = s.societe || "";
+      $("tel").value = s.tel || "";
+      $("mail").value = s.mail || "";
+      $("adresse").value = s.adresse || "";
+      $("cp").value = s.cp || "";
+      $("ville").value = s.ville || "";
+
+      $("type_ordi").checked = !!s.type_ordi;
+      $("type_smart").checked = !!s.type_smart;
+      $("type_tab").checked = !!s.type_tab;
+
+      $("modele").value = s.modele || "";
+      $("serial").value = s.serial || "";
+      $("problemes").value = s.problemes || "";
+
+      qsa('input[name="code_unlock"]').forEach(r => r.checked = (r.value === (s.code_unlock||"")));
+      $("pin").value = s.pin || "";
+      $("schema_seq").value = s.schema_seq || "";
+
+      $("accept_cgv").checked = !!s.accept_cgv;
+
+      $("notes").value = s.notes || "";
+      $("statut").value = s.statut || "";
+      $("prix").value = s.prix || "";
+
+      signatureDataUrl = s.signature_dataurl || "";
+      redrawSignatureFromDataUrl();
+    }
+
+    function saveState(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(formState()));
+    }
+
+    function clearState(){
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
+    // --- Autosave on input
+    const inputs = qsa("input, textarea, select");
+    inputs.forEach(el => el.addEventListener("input", () => saveState()));
+    inputs.forEach(el => el.addEventListener("change", () => saveState()));
+
+    // --- Buttons
+    $("btnSave").addEventListener("click", () => {
+      saveState();
+      alert("Sauvegardé ✅");
+    });
+
+    $("btnNew").addEventListener("click", () => {
+      if(!confirm("Réinitialiser le formulaire ?")) return;
+      clearState();
+      location.reload();
+    });
+
+    $("btnExportJson").addEventListener("click", () => {
+      const data = formState();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `lds_prise_en_charge_${new Date().toISOString().slice(0,10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    $("btnPdf").addEventListener("click", () => {
+      // Le plus fiable: impression navigateur -> "Enregistrer en PDF"
+      window.print();
+    });
+
+    // --- Pattern (schéma 3x3)
+    const dotsWrap = $("dots");
+    let patternSeq = [];
+    for(let i=1;i<=9;i++){
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "dot";
+      b.textContent = i;
+      b.addEventListener("click", () => {
+        if(patternSeq.includes(i)) return; // évite doublons
+        patternSeq.push(i);
+        b.classList.add("active");
+        $("schema_seq").value = patternSeq.join("-");
+        saveState();
+      });
+      dotsWrap.appendChild(b);
+    }
+
+    $("btnSchemaClear").addEventListener("click", () => {
+      patternSeq = [];
+      $("schema_seq").value = "";
+      qsa(".dot").forEach(d => d.classList.remove("active"));
+      saveState();
+    });
+
+    // If state preloads schema, reflect active dots
+    function syncDotsFromSchema(){
+      const seq = ($("schema_seq").value || "").split("-").map(x => parseInt(x,10)).filter(Boolean);
+      patternSeq = seq;
+      qsa(".dot").forEach((d, idx) => {
+        const n = idx+1;
+        if(seq.includes(n)) d.classList.add("active");
+        else d.classList.remove("active");
+      });
+    }
+
+    // --- Signature pad (canvas)
+    const canvas = $("signature");
+    const ctx = canvas.getContext("2d");
+    let drawing = false;
+    let last = null;
+    let signatureDataUrl = "";
+
+    function resizeCanvas(){
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.floor(rect.width * ratio);
+      canvas.height = Math.floor(rect.height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.lineWidth = 2.2;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "rgba(22,42,104,.95)";
+      redrawSignatureFromDataUrl();
+    }
+
+    function pos(e){
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches && e.touches[0];
+      const clientX = touch ? touch.clientX : e.clientX;
+      const clientY = touch ? touch.clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function start(e){
+      drawing = true;
+      last = pos(e);
+      e.preventDefault();
+    }
+    function move(e){
+      if(!drawing) return;
+      const p = pos(e);
+      ctx.beginPath();
+      ctx.moveTo(last.x, last.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      last = p;
+      e.preventDefault();
+    }
+    function end(){
+      drawing = false;
+      last = null;
+    }
+
+    canvas.addEventListener("mousedown", start);
+    canvas.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", end);
+
+    canvas.addEventListener("touchstart", start, {passive:false});
+    canvas.addEventListener("touchmove", move, {passive:false});
+    window.addEventListener("touchend", end);
+
+    $("btnSigClear").addEventListener("click", () => {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      signatureDataUrl = "";
+      saveState();
+    });
+
+    $("btnSigSave").addEventListener("click", () => {
+      signatureDataUrl = canvas.toDataURL("image/png");
+      saveState();
+      alert("Signature sauvegardée ✅");
+    });
+
+    function redrawSignatureFromDataUrl(){
+      if(!canvas.width || !canvas.height) return;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      if(!signatureDataUrl) return;
+      const img = new Image();
+      img.onload = () => {
+        // Draw scaled to fit
+        const rect = canvas.getBoundingClientRect();
+        ctx.drawImage(img, 0, 0, rect.width, rect.height);
+      };
+      img.src = signatureDataUrl;
+    }
+
+    // --- Init
+    window.addEventListener("resize", resizeCanvas);
+
+    const existing = loadState();
+    applyState(existing);
+    resizeCanvas();
+    syncDotsFromSchema();
+
+    // Keep dots synced if schema loaded
+    $("schema_seq").addEventListener("input", syncDotsFromSchema);
+  </script>
+</body>
+</html>
